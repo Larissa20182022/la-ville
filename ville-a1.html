@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La ville – Wortfeld Stadt, Französisch A1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<style>
+:root{--bg:#EEF2F8;--ink:#10213F;--card:#fff;--line:#C9D3E3;--navy:#14306B;--yel:#FFCD00;--ok:#1B7F4B;--bad:#C62839;--mut:#52617D;--c-lieux:#2F5FB8;--c-bat:#8A4FBF;--c-trans:#0E8A6B;--c-dir:#B07A00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1424;--ink:#E6ECF7;--card:#15213A;--line:#2A3A5C;--navy:#1E4296;--mut:#9FB0CF;--ok:#3FBF7F;--bad:#FF6B7A}}
+:root[data-theme="dark"]{--bg:#0C1424;--ink:#E6ECF7;--card:#15213A;--line:#2A3A5C;--navy:#1E4296;--mut:#9FB0CF;--ok:#3FBF7F;--bad:#FF6B7A}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.5 Barlow,system-ui,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:14px}
+h1,h2,.big,.q,.chip b{font-family:"Barlow Condensed",Barlow,sans-serif;font-weight:700}
+h1{font-size:2.6rem;line-height:1;margin:0 0 6px}
+h2{font-size:1.5rem;margin:18px 0 8px}
+p{margin:0 0 10px}.sm{font-size:.9rem;color:var(--mut)}
+.plate{background:var(--navy);color:#fff;border-radius:16px;padding:20px 22px;box-shadow:inset 0 0 0 4px var(--navy),inset 0 0 0 7px #fff;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.plate>div:first-child{flex:1 1 300px}.plate p{color:#DCE6FA;margin:0}
+#stats{flex:1 1 220px;min-width:220px}
+.lv{display:flex;justify-content:space-between;font-weight:600}
+.bar{height:12px;border-radius:6px;background:rgba(255,255,255,.25);margin:6px 0;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--yel);transition:width .5s}
+.meta{font-size:.9rem;color:#DCE6FA}
+#tabs{display:flex;gap:6px;overflow-x:auto;padding:14px 0 4px}
+#tabs button{flex:none;border:2px solid var(--navy);background:var(--card);color:var(--ink);font:600 1rem Barlow,sans-serif;padding:8px 16px;border-radius:999px;cursor:pointer}
+#tabs button[aria-selected=true]{background:var(--navy);color:#fff;border-color:var(--yel)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+.view[hidden]{display:none}
+.grp{margin-bottom:14px}
+.grp h2{background:var(--navy);color:#fff;display:inline-block;padding:3px 14px 3px 12px;border-radius:6px;border-left:8px solid var(--yel);margin:10px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--card);color:var(--ink);border:1px solid var(--line);border-left:6px solid var(--cc);border-radius:8px;padding:6px 12px;text-align:left;cursor:pointer;font:inherit;display:grid;grid-template-columns:auto auto;gap:0 8px;align-items:center}
+.lieux{--cc:var(--c-lieux)}.bat{--cc:var(--c-bat)}.trans{--cc:var(--c-trans)}.dir{--cc:var(--c-dir)}
+.chip span{grid-row:span 2;font-size:1.6rem}.chip b{font-size:1.25rem}
+.chip small{display:none;color:var(--mut)}.de .chip small,.chip.show small{display:block}
+.tool{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:6px 0 10px}
+input,select{font:inherit;padding:7px 10px;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden}
+.scroll{overflow-x:auto}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--navy);color:#fff;font-weight:600}
+td.em{font-size:1.4rem}
+.btn{font:600 1rem Barlow,sans-serif;border:2px solid var(--navy);background:var(--card);color:var(--ink);padding:9px 18px;border-radius:10px;cursor:pointer}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.no{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn.pri{background:var(--navy);color:#fff}
+.boxes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.bx{background:var(--card);border:2px solid var(--line);border-radius:10px;text-align:center;padding:6px;font-size:.9rem}
+.bx b{display:block;font-size:1.5rem;font-family:"Barlow Condensed",sans-serif}
+.b3{border-color:var(--yel)}
+.card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;min-height:240px;background:var(--card);color:var(--ink);border:3px solid var(--navy);border-radius:18px;cursor:pointer;margin-bottom:12px;padding:20px}
+.card.back{background:var(--navy);color:#fff}
+.card .em{font-size:3.4rem}.big{font-size:2.6rem;line-height:1.1}
+.card.back .sm{color:#DCE6FA}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.hud{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;font-weight:600}
+.q{font-size:2.4rem;line-height:1.15;margin:6px 0}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+.opt{font:600 1.1rem Barlow,sans-serif;padding:14px;border:2px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);cursor:pointer;text-align:left}
+.opt:hover:not(:disabled){border-color:var(--navy)}
+.opt.ok{background:var(--ok);border-color:var(--ok);color:#fff}.opt.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.fb{font-weight:600}
+.tasks{padding:0;list-style:none}.tasks li{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.tasks li.ok{border-color:var(--ok)}.tasks li.bad{border-color:var(--bad)}
+.tasks select{margin:0 4px}
+.badges{display:flex;flex-wrap:wrap;gap:10px;padding:0;list-style:none;margin:8px 0}
+.badges li{width:96px;text-align:center;font-size:.8rem;line-height:1.2;filter:grayscale(1);opacity:.45}
+.badges li.on{filter:none;opacity:1}.badges span{display:block;font-size:2rem}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--navy);color:#fff;border:2px solid var(--yel);padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:.3s;z-index:9;max-width:90%}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="plate">
+ <div><h1>La ville</h1><p>Wortfeld „Stadt“ für Französisch A1. Lerne Vokabeln, sammle XP und steige im Niveau auf.</p></div>
+ <div id="stats"></div>
+</header>
+<nav id="tabs" role="tablist">
+ <button data-v="wf">Wortfeld</button><button data-v="vl">Vokabelliste</button><button data-v="fc">Karteikarten</button><button data-v="qz">Quiz</button><button data-v="ta">Lückentext</button>
+</nav>
+<main>
+ <section id="v-wf" class="view"></section>
+ <section id="v-vl" class="view" hidden></section>
+ <section id="v-fc" class="view" hidden></section>
+ <section id="v-qz" class="view" hidden></section>
+ <section id="v-ta" class="view" hidden></section>
+</main>
+<h2>Abzeichen</h2>
+<ul class="badges" id="badges"></ul>
+<p><button class="btn" data-a="reset">Fortschritt zurücksetzen</button></p>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const CATS={lieux:'Orte & Straßen',bat:'Gebäude & Geschäfte',trans:'Verkehr',dir:'Orientierung'};
+const W=`lieux|la ville|die Stadt|🏙️
+lieux|la rue|die Straße|🛣️
+lieux|la place|der Platz|⛲
+lieux|le quartier|das Stadtviertel|🏘️
+lieux|le centre-ville|das Stadtzentrum|📍
+lieux|le parc|der Park|🌳
+lieux|le pont|die Brücke|🌉
+bat|l'église|die Kirche|⛪
+bat|la mairie|das Rathaus|🏛️
+bat|l'école|die Schule|🏫
+bat|l'hôpital|das Krankenhaus|🏥
+bat|la poste|die Post|📮
+bat|la banque|die Bank|🏦
+bat|le musée|das Museum|🖼️
+bat|le cinéma|das Kino|🎬
+bat|la bibliothèque|die Bibliothek|📚
+bat|le marché|der Markt|🧺
+bat|la boulangerie|die Bäckerei|🥖
+bat|le supermarché|der Supermarkt|🛒
+bat|le restaurant|das Restaurant|🍽️
+bat|la pharmacie|die Apotheke|💊
+bat|l'hôtel|das Hotel|🏨
+trans|la gare|der Bahnhof|🚉
+trans|l'arrêt de bus|die Bushaltestelle|🚏
+trans|le bus|der Bus|🚌
+trans|le métro|die U-Bahn|🚇
+trans|le tram|die Straßenbahn|🚊
+trans|la voiture|das Auto|🚗
+trans|le vélo|das Fahrrad|🚲
+trans|le feu rouge|die rote Ampel|🚦
+dir|à droite|rechts|➡️
+dir|à gauche|links|⬅️
+dir|tout droit|geradeaus|⬆️
+dir|près de|nahe bei|🔎
+dir|loin de|weit weg von|🔭
+dir|en face de|gegenüber von|↔️`.split('\n').map((l,id)=>{const[c,f,d,e]=l.split('|');return{id,c,f,d,e}});
+const T=[["Pour acheter du pain, je vais à la ___.","Um Brot zu kaufen, gehe ich zur ___.","boulangerie",["mairie","bibliothèque"]],
+["Le train part de la ___.","Der Zug fährt vom ___ ab.","gare",["poste","école"]],
+["Pour aller à la gare, je prends le ___.","Um zum Bahnhof zu kommen, nehme ich den ___.","bus",["musée","pont"]],
+["Pardon, où est la poste ? Tout ___, puis à gauche.","Entschuldigung, wo ist die Post? Immer ___, dann links.","droit",["feu","métro"]],
+["Le musée est près ___ la place.","Das Museum ist nahe beim Platz.","de",["à","en"]],
+["Je cherche un livre à la ___.","Ich suche ein Buch in der ___.","bibliothèque",["banque","pharmacie"]]];
+const B=[['first','🚏','Erster Halt','Erste richtige Antwort'],['str5','🔥','5 in Folge','5 richtige Antworten hintereinander'],['box','📦','Fachmeister','5 Wörter im Fach „Gelernt“'],['perf','🏅','Sans faute','Quiz ohne Fehler'],['xp100','🗼','100 XP','100 Punkte gesammelt'],['task','✏️','Lückenmeister','Alle Lückensätze richtig']];
+const LV=['Tourist·in','Passant·in','Habitant·in','Stadtführer·in','Maire'];
+const KEY='ville-a1';
+const fresh=()=>({xp:0,box:{},badges:[],task:{},day:'',streak:0});
+let S=fresh(),run=0,fc={q:[],i:0,flip:false},Q=null;
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+const iso=d=>d.toISOString().slice(0,10),today=iso(new Date());
+if(S.day!==today){S.streak=S.day===iso(new Date(Date.now()-864e5))?S.streak+1:1;S.day=today}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const speak=t=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';u.rate=.85;speechSynthesis.speak(u)}catch(e){}};
+const box=w=>Math.min(3,S.box[w.id]||0);
+const lvl=()=>Math.min(4,Math.floor(S.xp/100));
+let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2600)};
+function award(id){if(S.badges.includes(id))return;S.badges.push(id);toast('Neues Abzeichen: '+B.find(b=>b[0]===id)[2]);save();badges()}
+function gain(n){const o=lvl();S.xp+=n;if(S.xp>=100)award('xp100');if(lvl()>o)toast('Niveau aufgestiegen: '+LV[lvl()]);save();stats()}
+function good(){run++;award('first');if(run>=5)award('str5');if(W.filter(w=>box(w)>=3).length>=5)award('box')}
+const bad=()=>{run=0};
+function stats(){$('#stats').innerHTML=`<div class=lv><span>Niveau ${lvl()+1}</span><span>${LV[lvl()]}</span></div><div class=bar><i style="width:${lvl()>=4?100:S.xp%100}%"></i></div><div class=meta>${S.xp} XP, ${S.streak} ${S.streak===1?'Tag':'Tage'} in Folge 🔥</div>`}
+function badges(){$('#badges').innerHTML=B.map(b=>`<li class="${S.badges.includes(b[0])?'on':''}" title="${b[3]}"><span>${b[1]}</span>${b[2]}</li>`).join('')}
+
+function wf(){$('#v-wf').innerHTML=`<div class=tool><label><input type=checkbox id=dechk> Deutsch anzeigen</label><span class=sm>Tippe auf ein Wort: Du hörst die Aussprache.</span></div>`+Object.entries(CATS).map(([k,n])=>`<div class="grp ${k}"><h2>${n}</h2><div class=chips>${W.filter(w=>w.c===k).map(w=>`<button class=chip data-a=chip data-id=${w.id}><span>${w.e}</span><b>${w.f}</b><small>${w.d}</small></button>`).join('')}</div></div>`).join('');
+ $('#dechk').onchange=e=>$('#v-wf').classList.toggle('de',e.target.checked)}
+function vl(){const el=$('#v-vl');
+ el.innerHTML=`<h2>Vokabelliste</h2><div class=tool><input id=qs type=search placeholder="Suchen …" aria-label="Suchen"><select id=qc aria-label="Kategorie"><option value="">Alle Gruppen</option>${Object.entries(CATS).map(([k,n])=>`<option value=${k}>${n}</option>`).join('')}</select></div><div class=scroll><table><thead><tr><th></th><th>Français</th><th>Deutsch</th><th>Fach</th><th></th></tr></thead><tbody id=vb></tbody></table></div>`;
+ const f=()=>{const s=$('#qs').value.toLowerCase(),c=$('#qc').value;$('#vb').innerHTML=W.filter(w=>(!c||w.c===c)&&(w.f+w.d).toLowerCase().includes(s)).map(w=>`<tr><td class=em>${w.e}</td><td><b>${w.f}</b></td><td>${w.d}</td><td title="Fach im Karteikasten">${'●'.repeat(box(w))}${'○'.repeat(3-box(w))}</td><td><button class=btn data-a=spk data-id=${w.id} aria-label="Anhören">🔊</button></td></tr>`).join('')};
+ $('#qs').oninput=f;$('#qc').onchange=f;f()}
+
+function fcStart(){fc={q:shuffle(W.filter(w=>box(w)<3)).sort((a,b)=>box(a)-box(b)).slice(0,10),i:0,flip:false};fcRender()}
+function fcRender(){const el=$('#v-fc'),cnt=[0,1,2,3].map(b=>W.filter(w=>box(w)===b).length);
+ const bx=`<div class=boxes>${['Fach 1','Fach 2','Fach 3','Gelernt'].map((n,i)=>`<div class="bx b${i}"><b>${cnt[i]}</b>${n}</div>`).join('')}</div>`;
+ if(!fc.q.length||fc.i>=fc.q.length){el.innerHTML=`<h2>Karteikasten</h2>${bx}<p>${fc.q.length?'Runde geschafft. Gewusste Karten rücken ein Fach vor, nicht gewusste landen wieder in Fach 1.':'Alle Wörter sind gelernt. Bravo !'}</p><button class="btn pri" data-a=fcnew>Neue Runde</button>`;return}
+ const w=fc.q[fc.i];
+ el.innerHTML=`<h2>Karteikasten</h2>${bx}<p class=sm>Karte ${fc.i+1} von ${fc.q.length}. Tippe auf die Karte, um sie umzudrehen. Schwache Wörter kommen zuerst.</p><button class="card${fc.flip?' back':''}" data-a=fcflip><span class=em>${w.e}</span><span class=big>${fc.flip?w.d:w.f}</span><span class=sm>${fc.flip?w.f:'Was heißt das auf Deutsch?'}</span></button><div class=row><button class=btn data-a=spk data-id=${w.id}>🔊 Anhören</button>${fc.flip?'<button class="btn no" data-a=fcno>Noch nicht</button><button class="btn ok" data-a=fcok>Gewusst (+5 XP)</button>':''}</div>`}
+function fcAns(ok){const w=fc.q[fc.i];if(ok){S.box[w.id]=box(w)+1;good();gain(5)}else{S.box[w.id]=0;bad()}fc.i++;fc.flip=false;save();fcRender()}
+
+function qzStart(){Q={qs:shuffle(W).slice(0,10),i:0,lives:3,score:0,err:0,done:false};run=0;qzMake();qzRender()}
+function qzMake(){const w=Q.qs[Q.i];Q.opts=shuffle([w,...shuffle(W.filter(x=>x.id!==w.id&&x.c===w.c)).slice(0,3)]);Q.ans=null}
+function qzRender(){const el=$('#v-qz');
+ if(Q.done){el.innerHTML=`<h2>Quiz beendet</h2><p class=q>${Q.score} richtig, ${Q.err} falsch</p><p>${Q.lives<=0?'Keine Leben mehr. Übe die falschen Wörter in den Karteikarten und versuche es nochmal.':Q.err===0?'Sans faute ! +20 Bonus-XP.':'Gut gemacht ! Falsche Wörter liegen wieder in Fach 1.'}</p><button class="btn pri" data-a=qnew>Neues Quiz</button>`;return}
+ const w=Q.qs[Q.i],rev=Q.i%2===1,a=Q.ans;
+ el.innerHTML=`<h2>Quiz</h2><div class=hud><span>Frage ${Q.i+1} von 10</span><span aria-label="Leben">${'❤️'.repeat(Q.lives)}${'🖤'.repeat(3-Q.lives)}</span><span>Serie: ${run}</span></div><div class=q>${rev?w.d:w.e+' '+w.f}</div><p class=sm>${rev?'Wie heißt das auf Französisch?':'Was bedeutet das auf Deutsch?'}</p><div class=opts>${Q.opts.map(o=>`<button class="opt${a!==null?(o.id===w.id?' ok':o.id===a?' bad':''):''}" data-a=qans data-id=${o.id}${a!==null?' disabled':''}>${rev?o.f:o.d}</button>`).join('')}</div>${a!==null?`<p class=fb>${a===w.id?'Bravo !':'Pas tout à fait. Richtig: '+w.f+' = '+w.d}</p><button class="btn pri" data-a=qnext>Weiter</button>`:''}`}
+function qzAns(id){if(Q.ans!==null)return;const w=Q.qs[Q.i];Q.ans=id;
+ if(id===w.id){Q.score++;good();gain(10+(run>=3?5:0))}else{Q.lives--;Q.err++;S.box[w.id]=0;bad();save()}
+ speak(w.f);qzRender()}
+function qzNext(){Q.i++;if(Q.lives<=0||Q.i>=10){Q.done=true;if(Q.err===0){award('perf');gain(20)}}else qzMake();qzRender()}
+
+function ta(){$('#v-ta').innerHTML=`<h2>Lückentext</h2><p>Wähle das passende Wort. Jeder richtige Satz gibt einmalig 10 XP.</p><ol class=tasks>${T.map((t,i)=>{const[p,s]=t[0].split('___');return`<li id=t${i}><p>${p}<select data-i=${i} aria-label="Lücke ${i+1}"><option value="">…</option>${[t[2],...t[3]].sort((a,b)=>a.localeCompare(b)).map(o=>`<option>${o}</option>`).join('')}</select>${s}</p><span class=sm>${t[1]}</span></li>`}).join('')}</ol><button class="btn pri" data-a=tcheck>Prüfen</button> <span id=tres class=fb></span>`}
+function tcheck(){let n=0;T.forEach((t,i)=>{const li=$('#t'+i),v=li.querySelector('select').value,ok=v===t[2];li.className=ok?'ok':(v?'bad':'');if(ok){n++;if(!S.task[i]){S.task[i]=1;good();gain(10)}}else if(v)bad()});
+ $('#tres').textContent=n===T.length?'Parfait ! Alle richtig.':`${n} von ${T.length} richtig.`;if(Object.keys(S.task).length===T.length)award('task');save()}
+
+function show(v){$$('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===v));$$('.view').forEach(s=>s.hidden=s.id!=='v-'+v);
+ if(v==='vl')vl();if(v==='fc'&&!fc.q.length)fcStart();else if(v==='fc')fcRender();if(v==='qz'&&!Q)qzStart()}
+let rs=false;
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,id=+t.dataset.id;
+ if(a==='chip'){speak(W[id].f);t.classList.toggle('show')}
+ else if(a==='spk')speak(W[id].f);
+ else if(a==='fcflip'){fc.flip=!fc.flip;if(fc.flip)speak(fc.q[fc.i].f);fcRender()}
+ else if(a==='fcok')fcAns(true);else if(a==='fcno')fcAns(false);else if(a==='fcnew')fcStart();
+ else if(a==='qans')qzAns(id);else if(a==='qnext')qzNext();else if(a==='qnew')qzStart();
+ else if(a==='tcheck')tcheck();
+ else if(a==='reset'){if(!rs){rs=true;t.textContent='Wirklich alles löschen? Nochmal tippen.';return}S=fresh();S.day=today;S.streak=1;run=0;Q=null;fc={q:[],i:0,flip:false};save();rs=false;t.textContent='Fortschritt zurücksetzen';stats();badges();ta();show('wf');toast('Fortschritt gelöscht')}});
+$$('#tabs button').forEach(b=>b.onclick=()=>show(b.dataset.v));
+wf();ta();stats();badges();show('wf');save();
+</script>
+</body>
+</html>
